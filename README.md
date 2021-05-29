@@ -48,7 +48,7 @@ python imagenet.py \
 | 1 x 16 Block   | [Pruned Model](https://drive.google.com/drive/folders/1KiCTYfasGGqhROp3SA_82tp7Q4WAr5eF?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/15koTWszUzyINmMqtMaW0NSOdf8bhiPQr?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1dQKHqo5NscbdWSDbymgob3yEaHsLWnbb?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1pmH-Lgec5tki9OE2nut_c8q8rvC_HqAJ?usp=sharing) |
 | 1 x 32 Block   | [Pruned Model](https://drive.google.com/drive/folders/1QqXAt60Wn9n8vY7EZ4aXNnSwEnRbJt83?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1zcATTKj4eZUTf81DJeRslRP7jMuhQTmQ?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1izGPQphLYrRznHau951e3GGIWD_0W7xR?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1aOvNBbjbwe1LcRBaqLacMkrmBHcd-Mbg?usp=sharing) |
 
-To evaluate the performance of our pruned models, please use the following command:
+To verify the performance of our pruned models, download our pruned models from the links provided above and run the following command:
 
 ```
 python imagenet.py \
@@ -59,6 +59,7 @@ python imagenet.py \
 --evaluate [PRUNED_MODEL_PATH] \
 --eval_batch_size 256 \
 ```
+
 
 ### Arguments
 
