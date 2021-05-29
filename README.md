@@ -77,17 +77,17 @@ optional arguments:
   --train_batch_size    Batch size for training. default:256
   --eval_batch_size     Batch size for validation. default:100
   --momentum            Momentum for Momentum Optimizer. default:0.9
-  --lr LR               Learning rate for train. default:1e-2
+  --lr LR               Learning rate. default:1e-2
   --lr_decay_step       The iterval of learn rate decay for cifar. default:100 150
   --lr_decay_freq       The frequecy of learn rate decay for Imagenet. default:30
   --weight_decay        The weight decay of loss. default:4e-5
   --lr_type             lr scheduler. default: cos. optional:exp/cos/step/fixed
-  --use_dali            If this parameter exists, use dali module to load ImageNet data.
-  --conv_type           Conv type of conv layer. Default: BlockL1Conv. optional: BlockRandomConv
-  --pr_target           Target pruning rate of parameters. default:0.5
-  --full                If this parameter exists, prune full connect layer.
-  --N                   Number of kernels for the 1:N pattern.
-  --rearrange           If this parameter exists, rearrange the filters for better performance.
+  --use_dali            If this parameter exists, use dali module to load ImageNet data (benefit in training acceleration).
+  --conv_type           Importance criterion of filters. Default: BlockL1Conv. optional: BlockRandomConv
+  --pr_target           Pruning rate. default:0.5
+  --full                If this parameter exists, prune fully-connected layer.
+  --N                   Consecutive N kernels for removal (see paper for details).
+  --rearrange           If this parameter exists, filters will be rearranged (see paper for details).
 ```
 
 ### 
