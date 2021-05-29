@@ -3,21 +3,24 @@ import torch.nn as nn
 import math
 import torch.nn.functional as F
 from utils.builder import get_builder
+from utils.conv_type import *
+
+
 
 def conv_bn(builder, inp, oup, stride):
     return nn.Sequential(
-        builder.conv2d(inp, oup, 3, stride, 1, bias=False),
+        nn.Conv2d(inp, oup, 3, stride, 1, bias=False),
         nn.BatchNorm2d(oup),
         nn.ReLU(inplace=True)
     )
 
 def conv_dw(builder, inp, oup, stride):
     return nn.Sequential(
-        builder.conv2d(inp, inp, 3, stride, 1, groups=inp, bias=False),
+        nn.Conv2d(inp, inp, 3, stride, 1, groups=inp, bias=False),
         nn.BatchNorm2d(inp),
         nn.ReLU(inplace=True),
 
-        builder.conv2d(inp, oup, 1, 1, 0, bias=False),
+        builder.conv2d(inp, oup, 1, 1, 0, bias=True),
         nn.BatchNorm2d(oup),
         nn.ReLU(inplace=True),
     )
@@ -33,7 +36,7 @@ class MobileNet(nn.Module):
 
         self.features = self._make_layers(builder, in_planes, cfg, conv_dw)
 
-        self.classifier = nn.Linear(cfg[-1], n_class)
+        self.classifier = nn.Sequential(builder.conv1x1_fc(cfg[-1], n_class))
         
         self._initialize_weights()
 
@@ -41,11 +44,11 @@ class MobileNet(nn.Module):
         x = self.conv1(x)
         x = self.features(x)
         x = F.avg_pool2d(x, 7)
-        x = x.view(-1, 1024)
+        #x = x.view(-1, 1024)
         #x = x.mean(3).mean(2)  # global average pooling
 
         x = self.classifier(x)
-        return x
+        return x.flatten(1)
 
     def _make_layers(self, builder, in_planes, cfg, layer):
         layers = []
@@ -65,7 +68,8 @@ class MobileNet(nn.Module):
                 n = m.weight.size(1)
                 m.weight.data.normal_(0, 0.01)
                 m.bias.data.zero_()
+            elif isinstance(m, BlockL1Conv) or isinstance(m, BlockRandomConv):
+                m.bias.data.zero_()
 
 def mobilenet_v1():
     return MobileNet(get_builder(), n_class=1000)
-

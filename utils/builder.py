@@ -14,7 +14,7 @@ class Builder(object):
         self.bn_layer = bn_layer
         self.first_layer = first_layer or conv_layer
 
-    def conv(self, kernel_size, in_planes, out_planes, stride=1, first_layer=False):
+    def conv(self, kernel_size, in_planes, out_planes, stride=1, first_layer=False, bias=False):
         conv_layer = self.first_layer if first_layer else self.conv_layer
 
         if first_layer:
@@ -27,11 +27,11 @@ class Builder(object):
                 kernel_size=3,
                 stride=stride,
                 padding=1,
-                bias=False,
+                bias=bias,
             )
         elif kernel_size == 1:
             conv = conv_layer(
-                in_planes, out_planes, kernel_size=1, stride=stride, bias=False
+                in_planes, out_planes, kernel_size=1, stride=stride, bias=bias
             )
         elif kernel_size == 5:
             conv = conv_layer(
@@ -40,7 +40,7 @@ class Builder(object):
                 kernel_size=5,
                 stride=stride,
                 padding=2,
-                bias=False,
+                bias=bias,
             )
         elif kernel_size == 7:
             conv = conv_layer(
@@ -49,12 +49,12 @@ class Builder(object):
                 kernel_size=7,
                 stride=stride,
                 padding=3,
-                bias=False,
+                bias=bias,
             )
         else:
             return None
 
-        self._init_conv(conv)
+        #self._init_conv(conv)
 
         return conv
 
@@ -90,6 +90,11 @@ class Builder(object):
     def conv1x1(self, in_planes, out_planes, stride=1, first_layer=False):
         """1x1 convolution with padding"""
         c = self.conv(1, in_planes, out_planes, stride=stride, first_layer=first_layer)
+        return c
+    
+    def conv1x1_fc(self, in_planes, out_planes, stride=1, first_layer=False):
+        """full connect layer"""
+        c = self.conv(1, in_planes, out_planes, stride=stride, first_layer=first_layer, bias=True)
         return c
 
     def conv7x7(self, in_planes, out_planes, stride=1, first_layer=False):
@@ -149,7 +154,11 @@ class Builder(object):
             nn.init.kaiming_uniform_(conv.weight, a=math.sqrt(5))
         else:
             raise ValueError(f"{args.init} is not an initialization option!")
-
+        
+        if conv.bias.data is not None:
+            conv.data.zero_()
+            import pdb
+            pdb.set_trace()
 
 def get_builder():
 

@@ -5,24 +5,31 @@ import sys
 import yaml
 
 
-parser = argparse.ArgumentParser(description='Unstructured Pruning')
+parser = argparse.ArgumentParser(description='1xN Block Pruning')
 
-parser.add_argument("--config", help="Config file to use (see configs dir)", default=None)
+parser.add_argument(
+    "--config", 
+    help="Config file to use (see configs dir)", 
+    default=None)
 
 parser.add_argument(
     '--use_dali',
     action='store_true',
-    help='whether use dali module to load data')
+    help='whether use dali module to load data'
+    )
 
 parser.add_argument(
     "--label-smoothing",
     type=float,
     help="Label smoothing to use, default 0.0",
-    default=0.0,
+    default=0.0
 )
 
 parser.add_argument(
-    "--warmup_length", default=5, type=int, help="Number of warmup iterations"
+    "--warmup_length", 
+    default=5, 
+    type=int, 
+    help="Number of warmup iterations"
 )
 
 parser.add_argument(
@@ -36,8 +43,15 @@ parser.add_argument(
 parser.add_argument(
 	'--pretrained_model',
 	type=str,
-	default='/pre-train/vgg16_cifar10.pt',
+	default=None,
 	help='Path of the pre-trained model',
+)
+
+parser.add_argument(
+	'--pruned_model',
+	type=str,
+	default=None,
+	help='Path of the pruned model to evaluate',
 )
 
 parser.add_argument(
@@ -79,15 +93,15 @@ parser.add_argument(
 parser.add_argument(
     '--arch',
     type=str,
-    default='vgg_cifar',
-    help='Architecture of model. default:vgg_cifar'
+    default='mobilenet_v2',
+    help='Architecture of model. default:mobilenet_v2. optional:mobilenet_v1, mobilenet_v3_small, mobilenet_v3_large.'
 )
 
 parser.add_argument(
     '--num_epochs',
     type=int,
-    default=300,
-    help='The num of epochs to train. default:150'
+    default=180,
+    help='The num of epochs to train. default:180'
 )
 
 parser.add_argument(
@@ -114,27 +128,38 @@ parser.add_argument(
 parser.add_argument(
     '--lr',
     type=float,
-    default=0.1,
+    default=0.01,
     help='Learning rate for train. default:0.1'
 )
 
-parser.add_argument("--optimizer", help="Which optimizer to use", default="sgd")
-
 parser.add_argument(
-    "--lr_policy", default="step", help="Policy for the learning rate."
+    "--optimizer", 
+    help="Which optimizer to use", 
+    default="sgd"
 )
 
 parser.add_argument(
-    "--lr_adjust", default=30, type=int, help="Interval to drop lr"
+    "--lr_policy", 
+    default="cos", 
+    help="Policy for the learning rate."
+)
+
+parser.add_argument(
+    "--lr_adjust", 
+    default=30, type=int, 
+    help="Interval to drop lr"
 )
 parser.add_argument(
-    "--lr_gamma", default=0.1, type=float, help="Multistep multiplier"
+    "--lr_gamma", 
+    default=0.1, 
+    type=float, 
+    help="Multistep multiplier"
 )
 
 parser.add_argument(
     '--weight_decay',
     type=float,
-    default=5e-4,
+    default=4e-5,
     help='The weight decay of loss. default:1e-4'
 )
 
@@ -152,6 +177,12 @@ parser.add_argument(
 )
 
 parser.add_argument(
+    '--rearrange',
+    action='store_true',
+    help='Rearrange the 1*N block using same-size kmeans.'
+)
+
+parser.add_argument(
     "--nesterov",
     default=False,
     action="store_true",
@@ -159,42 +190,42 @@ parser.add_argument(
 )
 
 parser.add_argument(
-    "--first_layer_dense", action="store_true", help="First layer dense or sparse"
+    "--first-layer-type", 
+    type=str, 
+    default=None, 
+    
+    help="Conv type of first layer"
 )
 
 parser.add_argument(
-    "--last_layer_dense", action="store_true", help="Last layer dense or sparse"
+    "--conv_type", 
+    type=str, 
+    default='BlockL1Conv', 
+    help="Conv type of conv layer. Default: BlockL1Conv. optional: BlockRandomConv"
 )
 
 parser.add_argument(
-    "--first-layer-type", type=str, default=None, help="Conv type of first layer"
+    "--bn_type", 
+    default='LearnedBatchNorm', 
+    help="BatchNorm type"
 )
 
 parser.add_argument(
-    "--conv_type", type=str, default=None, help="Conv type of conv layer. Default: DenseConv. optional: STRConv/GMPConv/DNWConv"
+    "--init", 
+    default="kaiming_normal", 
+    help="Weight initialization modifications"
 )
 
 parser.add_argument(
-    "--layerwise", type=str, default="uniform", help="Configuration of layerwise pruning rate. Default: uniform. optional: l1/m1/m2/m3"
-)
-
-parser.add_argument("--bn_type", default='LearnedBatchNorm', help="BatchNorm type")
-
-parser.add_argument(
-    "--init", default="kaiming_normal", help="Weight initialization modifications"
-)
-parser.add_argument(
-    "--no_bn_decay", action="store_true", default=False, help="No batchnorm decay"
+    "--mode", 
+    default="fan_in", 
+    help="Weight initialization mode"
 )
 
 parser.add_argument(
-    "--twolr", action="store_true", help="Use 2*lr trick"
-)
-
-parser.add_argument("--mode", default="fan_in", help="Weight initialization mode")
-
-parser.add_argument(
-    "--nonlinearity", default="relu", help="Nonlinearity used by initialization"
+    "--nonlinearity", 
+    default="relu", 
+    help="Nonlinearity used by initialization"
 )
 
 parser.add_argument(
@@ -207,8 +238,21 @@ parser.add_argument(
 parser.add_argument(
     '--debug',
     action='store_true',
-    help='input to open debug state')
+    help='input to open debug state'
+)
 
+parser.add_argument(
+    "--full", 
+    action="store_true", 
+    help="prune full-connect layer"
+)
+
+parser.add_argument(
+    "--N", 
+    default=16, 
+    type=int, 
+    help="kernel number of the block 1 x N pattern"
+)
 
 args = parser.parse_args()
 

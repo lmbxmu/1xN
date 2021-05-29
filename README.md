@@ -1,31 +1,64 @@
-# 1-N
+# 1×N Block Pattern for Network Sparsity
 
-
-## Running Code
+A pytorch re-implementation of 1×N Block Pattern for Network Sparsity.
 
 ### Requirements
 
+-  Python 3.7
 -  Pytorch >= 1.0.1
 -  CUDA = 10.0.0
 
-### Pre-train Models
+### Running code
 
-Additionally, we provide several pre-trained models used in our experiments.
+To reproduce our experiments, please use the following command:
 
-#### CIFAR-10
-
-| [VGG16](https://drive.google.com/open?id=1pz-_0CCdL-1psIQ545uJ3xT6S_AAnqet) | [ResNet56](https://drive.google.com/open?id=1pt-LgK3kI_4ViXIQWuOP0qmmQa3p2qW5) | [ResNet110](https://drive.google.com/open?id=1Uqg8_J-q2hcsmYTAlRtknCSrkXDqYDMD) |[GoogLeNet](https://drive.google.com/open?id=1YNno621EuTQTVY2cElf8YEue9J4W5BEd) |
-
-#### ImageNet
-
- | [ResNet50](https://download.pytorch.org/models/resnet50-19c8e357.pth) |[MobileNet-V1](https://hanlab.mit.edu/projects/amc/external/mobilenet_imagenet.pth.tar) | 
-
-### 
-
-```shell
-python imagenet.py --arch mobilenet_v2 --data_path /media/MEMORY_DATA --job_dir ../Experiment/test  --pretrained_model ../pre-train/mobilenet_v2.pth.tar --lr 0.05 --num_epochs 180 --weight_decay 4e-5 --gpus 0 --train_batch_size 256 --eval_batch_size 256 --conv_type Block16UnfoldConv --layerwise uniform --debug
+```
+python imagenet.py \
+--gpus 0 \
+--arch mobilenet_v1 (or mobilenet_v2 or mobilenet_v3_large or mobilenet_v3_small) \
+--job_dir ./experiment/ \
+--data_path [DATA_PATH] \
+--pretrained_model [PRETRAIN_MODEL_PATH] \
+--pr_target 0.5 \
+--N 4 (or 2, 8, 16, 32) \
+--conv_type BlockL1Conv \
+--train_batch_size 256 \
+--eval_batch_size 256 \
+--rearrange \
 ```
 
+### Evaluate our pruned models
+
+**Table 1: Performance studies of our 1×N block sparsity with and without filter rearrangement.**
+
+|              | N=2                                                          | N=4                                                          | N=8                                                          | N=16                                                         | N=32                                                         |
+| ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| w/o Rearange | [Pruned Model](https://drive.google.com/drive/folders/1U7DnIkJ9aMxRhMGQETVur21kHjIhzb-6?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1wCZKyz-PmM0dvydLqQYqEoS4Mq7to9KC?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1TLkaKksJXDAYBeXzGXVafYlZ_UPeSQiI?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1l2L-VEX10Kl4QtUtyivUtGunvl5_W1se?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1w0ERwQ6X7KL3srdiit-ls6Ppqv4NXGZt?usp=sharing) |
+| Rearrange    | [Pruned Model](https://drive.google.com/drive/folders/1qRJDeYr5QdP_qtvKdkF0-RF0La3HbNLR?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1pslyMvs_LR_SE6coLq1a_uMwg6t65aj-?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1S9UzvbN-16MezlBb9x98Id-XaWDs4cei?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/17PiNdI9CGjtDBpEPmLDgyen764U9HP2P?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1e8VehUWw9XU9a4qvP2lYBmoM5c_AlDnw?usp=sharing) |
+
+**Table 2:  Performance comparison of our 1×N block sparsity against weight pruning and filter pruning**
+
+|                | MobileNet-V1                                                 | MobileNet-V2                                                 | MobileNet-V3-small                                           | MobileNet-V3-large                                           |
+| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Weight Pruning | [Pruned Model](https://drive.google.com/drive/folders/1VDKwm8E2pfiZrIChFDBhsJtRx1LOwgR4?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1FGQFjEkRoSkg3qTAXqjZraDVP4sEHFjZ?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1TopFbIgopEDdoQ8qf_FE4UuaKRhq-COn?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1vn9p7G4g7fZ2IP28Cm2gxMdzHJgeKqjP?usp=sharing) |
+| Filter Pruning | [Pruned Model](https://drive.google.com/drive/folders/19pUzgrenVMt98y496qnTV2HoIAxM8Adp?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1tKQIyc2bcdF68OlADv55JdIRTKU78VtS?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1fgaPjCe1pOLKvfGbm89hNeGzQ4qpTzs_?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1zasJdeBGJY-xPJ6n9fm6cgpeUpGHFH-z?usp=sharing) |
+| 1 x 2 Block    | [Pruned Model](https://drive.google.com/drive/folders/1R8qrP84-cfAZ5fH1FKrUi3o-V51gfZK7?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1IYK4I-c334uTovdUWaE_42S0p5egoiNk?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1OnTNcN5DMVAwaGSY-PO7ZFp831Z368aX?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1M6PHEH60b8tjS594jFIEVwKtfyD3O9NJ?usp=sharing) |
+| 1 x 4 Block    | [Pruned Model](https://drive.google.com/drive/folders/1oWx-ceweDIjlCFF9bhujbNmjV6oFEmNg?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1T1gyvPwq2qkr1S-EhghxRTadT3_ZID8G?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/13JDlVJO5WgKJLSA5hR07U-5LJdNXWsvz?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1wtCox9kqGa7f6B9Z0c-D9cKX_VmQYkUo?usp=sharing) |
+| 1 x 8 Block    | [Pruned Model](https://drive.google.com/drive/folders/1N_bEAW5B04ji2t3F24vqkKFI27kxW2qs?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/13h0VLJP73Htch4MHbQr34RULnuQjG584?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1Pi_OQNspaGcAo58hiqPkqgWHN3s8votq?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1pmH-Lgec5tki9OE2nut_c8q8rvC_HqAJ?usp=sharing) |
+| 1 x 16 Block   | [Pruned Model](https://drive.google.com/drive/folders/1KiCTYfasGGqhROp3SA_82tp7Q4WAr5eF?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/15koTWszUzyINmMqtMaW0NSOdf8bhiPQr?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1dQKHqo5NscbdWSDbymgob3yEaHsLWnbb?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1pmH-Lgec5tki9OE2nut_c8q8rvC_HqAJ?usp=sharing) |
+| 1 x 32 Block   | [Pruned Model](https://drive.google.com/drive/folders/1QqXAt60Wn9n8vY7EZ4aXNnSwEnRbJt83?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1zcATTKj4eZUTf81DJeRslRP7jMuhQTmQ?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1izGPQphLYrRznHau951e3GGIWD_0W7xR?usp=sharing) | [Pruned Model](https://drive.google.com/drive/folders/1aOvNBbjbwe1LcRBaqLacMkrmBHcd-Mbg?usp=sharing) |
+
+To evaluate the performance of our pruned models, please use the following command:
+
+```
+python imagenet.py \
+--gpus 0 \
+--arch mobilenet_v1 (or mobilenet_v2 or mobilenet_v3_large or mobilenet_v3_small) \
+--job_dir ./experiment/ \
+--data_path [DATA_PATH] \
+--evaluate [PRUNED_MODEL_PATH] \
+--eval_batch_size 256 \
+```
 
 ### Arguments
 
@@ -33,30 +66,27 @@ python imagenet.py --arch mobilenet_v2 --data_path /media/MEMORY_DATA --job_dir 
 optional arguments:
   -h, --help            show this help message and exit
   --gpus                Select gpu_id to use. default:[0]
-  --data_set            Select dataset to train. default:cifar10
-  --data_path           The dictionary where the input is stored.
-                        default:/home/lishaojie/data/cifar10/
+  --data_path           The dictionary where the data is stored.
   --job_dir             The directory where the summaries will be stored.
-                        default:./experiments
-  --reset               Reset the directory?
   --resume              Load the model from the specified checkpoint.
-  --refine              Path to the model to be fine tuned.
-  --arch                Architecture of model. For cifar: vgg_cifar, resnet_cifar, googlenet, densenet .For ImageNet :vgg,resnet,googlenet,densenet
-  --cfg                 Detail architecuture of model. For cifar: vgg16, resnet56/110, googlenet. For ImageNet :vgg16,resnet18/34/50/101/152
-  --num_epochs          The num of epochs to train. default:150
-  --train_batch_size    Batch size for training. default:128
+  --pretrain_model 			Path of the pre-trained model.
+  --pruned_model 				Path of the pruned model to evaluate.
+  --arch                Architecture of model. For ImageNet :mobilenet_v1, mobilenet_v2, mobilenet_v3_small, mobilenet_v3_large
+  --num_epochs          The num of epochs to train. default:180
+  --train_batch_size    Batch size for training. default:256
   --eval_batch_size     Batch size for validation. default:100
-  --momentum            Momentum for MomentumOptimizer. default:0.9
+  --momentum            Momentum for Momentum Optimizer. default:0.9
   --lr LR               Learning rate for train. default:1e-2
   --lr_decay_step       The iterval of learn rate decay for cifar. default:100 150
   --lr_decay_freq       The frequecy of learn rate decay for Imagenet. default:30
-  --weight_decay        The weight decay of loss. default:5e-4
-  --lr_type             lr scheduler. default: step. optional:exp/cos/step/fixed
+  --weight_decay        The weight decay of loss. default:4e-5
+  --lr_type             lr scheduler. default: cos. optional:exp/cos/step/fixed
   --use_dali            If this parameter exists, use dali module to load ImageNet data.
-  --conv_type           Conv type of conv layer. Default: DenseConv. optional: Block16L1Conv/Block16RandomConv/Block16UnfoldConv
-
+  --conv_type           Conv type of conv layer. Default: BlockL1Conv. optional: BlockRandomConv
+  --pr_target           Target pruning rate of parameters. default:0.5
+  --full                If this parameter exists, prune full connect layer.
+  --N                   Number of kernels for the 1:N pattern.
+  --rearrange           If this parameter exists, rearrange the filters for better performance.
 ```
 
-## Tips
-
-Any problem, free to contact yxzhangxmu@163.com.
+### 

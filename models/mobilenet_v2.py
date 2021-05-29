@@ -2,6 +2,8 @@ import torch
 import torch.nn as nn
 import math
 from utils.builder import get_builder
+from utils.conv_type import *
+
 
 def conv_bn(builder, inp, oup, stride):
     return nn.Sequential(
@@ -13,7 +15,7 @@ def conv_bn(builder, inp, oup, stride):
 
 def conv_1x1_bn(builder, inp, oup):
     return nn.Sequential(
-        builder.conv2d(inp, oup, 1, 1, 0, bias=False),
+        builder.conv2d(inp, oup, 1, 1, 0, bias=True),
         nn.BatchNorm2d(oup),
         nn.ReLU6(inplace=True)
     )
@@ -35,13 +37,13 @@ class InvertedResidual(nn.Module):
                 nn.BatchNorm2d(hidden_dim),
                 nn.ReLU6(inplace=True),
                 # pw-linear
-                builder.conv2d(hidden_dim, oup, 1, 1, 0, bias=False),
+                builder.conv2d(hidden_dim, oup, 1, 1, 0, bias=True),
                 nn.BatchNorm2d(oup),
             )
         else:
             self.conv = nn.Sequential(
                 # pw
-                builder.conv2d(inp, hidden_dim, 1, 1, 0, bias=False),
+                builder.conv2d(inp, hidden_dim, 1, 1, 0, bias=True),
                 nn.BatchNorm2d(hidden_dim),
                 nn.ReLU6(inplace=True),
                 # dw
@@ -49,7 +51,7 @@ class InvertedResidual(nn.Module):
                 nn.BatchNorm2d(hidden_dim),
                 nn.ReLU6(inplace=True),
                 # pw-linear
-                builder.conv2d(hidden_dim, oup, 1, 1, 0, bias=False),
+                builder.conv2d(hidden_dim, oup, 1, 1, 0, bias=True),
                 nn.BatchNorm2d(oup),
             )
 
@@ -108,19 +110,20 @@ class MobileNetV2(nn.Module):
         
         # make it nn.Sequential
         self.features = nn.Sequential(*self.features)
-
+        self.pool = nn.AvgPool2d(7)
         self.classifier = nn.Sequential(
             nn.Dropout(0),
-            nn.Linear(self.last_channel, n_class),
+            builder.conv1x1_fc(self.last_channel, n_class)
+            #nn.Linear(self.last_channel, n_class),
             )
 
         self._initialize_weights()
 
     def forward(self, x):
         x = self.features(x)
-        x = x.mean(3).mean(2)
+        x = self.pool(x)
         x = self.classifier(x)
-        return x
+        return x.flatten(1)
 
     def _initialize_weights(self):
         for m in self.modules():
@@ -131,32 +134,9 @@ class MobileNetV2(nn.Module):
                 n = m.weight.size(1)
                 m.weight.data.normal_(0, 0.01)
                 m.bias.data.zero_()
+            elif isinstance(m, BlockL1Conv) or isinstance(m, BlockRandomConv):
+                m.bias.data.zero_()
                 
 def mobilenet_v2():
     return MobileNetV2(get_builder())
 
-
-if __name__ == "__main__":
-    '''
-    model = mobilenet_v2()
-    import thop
-    from thop import profile
-
-    Input = torch.randn(1, 3, 224, 224)
-    flops, params = profile(model, inputs=(Input, ))
-
-    print('--------------Model--------------')
-    print('Params: %.2f M '%(params/1000000))
-    print('FLOPS: %.2f M '%(flops/1000000))
-
-
-    for name, module in model.named_modules():
-        if isinstance(module, nn.Conv2d):
-            for param_tensor in module.state_dict():
-                print(param_tensor,'\t',module.state_dict()[param_tensor].size())
-
-    ckpt = torch.load('/Users/zhangyuxin/Documents/MAC/pretrain_model/mobilenet_v2.pth.tar',map_location='cpu')
-    for param_tensor in model.state_dict():
-        print(param_tensor, '\t', model.state_dict()[param_tensor].size())
-    model.load_state_dict(ckpt)
-    '''
