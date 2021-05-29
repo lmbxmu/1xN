@@ -69,8 +69,8 @@ optional arguments:
   --data_path           The dictionary where the data is stored.
   --job_dir             The directory where the summaries will be stored.
   --resume              Load the model from the specified checkpoint.
-  --pretrain_model 			Path of the pre-trained model.
-  --pruned_model 				Path of the pruned model to evaluate.
+  --pretrain_model      Path of the pre-trained model.
+  --pruned_model        Path of the pruned model to evaluate.
   --arch                Architecture of model. For ImageNet :mobilenet_v1, mobilenet_v2, mobilenet_v3_small, mobilenet_v3_large
   --num_epochs          The num of epochs to train. default:180
   --train_batch_size    Batch size for training. default:256
