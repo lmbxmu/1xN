@@ -1,4 +1,4 @@
-# 1$\times$N Block Pattern for Network Sparsity
+# 1xN Block Pattern for Network Sparsity
 
 This is Pytorch re-implementation of "1×N Block Pattern for Network Sparsity". A more formal project will be released as soon as we are given the authority from Alibaba Group.
 
