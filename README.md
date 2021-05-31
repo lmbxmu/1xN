@@ -36,7 +36,7 @@ python imagenet.py \
 
 ### Accuracy Performance
 
-**Table 1:  Performance comparison of our 1×N block sparsity against weight pruning and filter pruning**
+**Table: Performance comparison of our 1×N block sparsity against weight pruning and filter pruning**
 
 | MobileNet-V1   | Top-1 Acc. | Top-5 Acc. | Model Link                                                   |
 | :------------- | ---------- | ---------- | ------------------------------------------------------------ |
@@ -126,7 +126,7 @@ optional arguments:
 
 <div align=center><img src="rearrangement.jpg" height = "60%" width = "70%"/></div>
 
-**Table 1: Performance studies of our 1×N block sparsity with and without filter rearrangement.**
+**Table: Performance studies of our 1×N block sparsity with and without filter rearrangement.**
 
 | N = 2        | Top-1 Acc. | Top-5 Acc. | Model Link                                                   |
 | :----------- | ---------- | ---------- | ------------------------------------------------------------ |
