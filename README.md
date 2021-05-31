@@ -167,7 +167,7 @@ optional arguments:
 Our sparse convolution implementation has been released to [TVM](https://github.com/apache/tvm/blob/main/tutorials/auto_scheduler/tune_network_x86.py) community.
 
 
-### Contact
+## 4）Contact
 
 Any problem regarding this code re-implementation, please contact the first author: lmbxmu@stu.xmu.edu.cn or the third author: yxzhangxmu@163.com.
 
