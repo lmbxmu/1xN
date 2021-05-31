@@ -2,6 +2,11 @@
 
 A pytorch re-implementation of 1×N Block Pattern for Network Sparsity.
 
+
+<div align=center><img src="img/framework.jpeg" height = "60%" width = "70%"/></div>
+
+
+
 ### Requirements
 
 -  Python 3.7
