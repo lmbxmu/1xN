@@ -34,6 +34,12 @@ python imagenet.py \
 --rearrange \
 ```
 
+Additionally, we provide the pre-trained models used in our experiments.
+
+| MobileNet-V1                                                 | MobileNet-V2                                                 | MobileNet-V3-small                                           | MobileNet-V3-large   |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | -------------------- |
+| [Pre-trained Model](https://drive.google.com/file/d/1bTk8nhghmiQNiE56ZdLioGbB7tNWtFMP/view?usp=sharing) | [Pre-trained Model](https://drive.google.com/file/d/1rOMvEr_KCAabpAQ1PFDmRvvPB7y2Uhg8/view?usp=sharing) | [Pre-trained Model](https://drive.google.com/file/d/1s0kMjO2_61IgaIigJWjRzH5XPqRJyWiI/view?usp=sharing) | [Pre-trained Model]( |
+
 ### Accuracy Performance
 
 **Table: Performance comparison of our 1×N block sparsity against weight pruning and filter pruning**
