@@ -151,6 +151,7 @@ The above is our Pytorch re-implementation. A formal project will be released so
 ### Contact
 
 Any problem regarding this code re-implementation, please contact the first author: lmbxmu@stu.xmu.edu.cn or the third author: yxzhangxmu@163.com.
+
 Any problem regarding the sparse convolution implementation, please contact the second author: laiyin.lyc@alibaba-inc.com.
 
 
