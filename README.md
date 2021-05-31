@@ -3,6 +3,9 @@
 This is Pytorch re-implementation of "1×N Block Pattern for Network Sparsity". 
 
 
+## 1） Framework
+
+
 <div align=center><img src="comparison.jpg" height = "60%" width = "70%"/></div>
 
 
