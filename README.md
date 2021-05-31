@@ -81,7 +81,7 @@ python imagenet.py \
 
 <div align=center><img src="rates.jpg" height = "60%" width = "70%"/></div>
 
-More links for pruned models under different pruning rates and their training logs can be found [here]().
+More links for pruned models under different pruning rates and their training logs can be found [here](https://drive.google.com/drive/folders/1Exbxsf-VlJUmaLxxeJ0EmP0ymkpZK5mQ?usp=sharing).
 
 
 ### Evaluate our models
@@ -173,7 +173,7 @@ Our sparse convolution implementation has been released to [TVM](https://github.
 
 ## 4）Contact
 
-Any problem regarding this code re-implementation, please contact the first author: lmbxmu@stu.xmu.edu.cn or the third author: yxzhangxmu@163.com.
+Any problem regarding this code re-implementation, please contact the first author: lmbxmu@stu.xmu.edu.cn or the third author: yuxinzhang@stu.xmu.edu.cn.
 
 Any problem regarding the sparse convolution implementation, please contact the second author: xiamenlyc@gmail.com.
 
