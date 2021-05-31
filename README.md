@@ -1,9 +1,9 @@
 # 1×N Block Pattern for Network Sparsity
 
-This is Pytorch re-implementation of "1×N Block Pattern for Network Sparsity".  A formal project will be released soon subject to the authority of Alibaba Group.
+This is Pytorch re-implementation of "1×N Block Pattern for Network Sparsity". A more formal project will be released as soon as we are given the authority from Alibaba Group.
 
 
-## 1） Framework
+## 1) 1xN Block Sparsity
 
 
 <div align=center><img src="comparison.jpg" height = "60%" width = "70%"/></div>
@@ -150,12 +150,12 @@ optional arguments:
 ## 2）Filter Rearrangement
 
 
-<div align=center><img src="comparison.jpg" height = "60%" width = "70%"/></div>
+<div align=center><img src="rearrangement.jpg" height = "60%" width = "70%"/></div>
 
 
 ## 3）Encoding and Decoding Effieicney
 
-<div align=center><img src="comparison.jpg" height = "60%" width = "70%"/></div>
+<div align=center><img src="sparse.jpg" height = "60%" width = "70%"/></div>
 
 Our sparse convolution implementation has been released to [TVM](https://github.com/apache/tvm/blob/main/tutorials/auto_scheduler/tune_network_x86.py) community.
 
