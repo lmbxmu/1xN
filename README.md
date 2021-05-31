@@ -81,7 +81,7 @@ python imagenet.py \
 
 <div align=center><img src="rates.jpg" height = "60%" width = "70%"/></div>
 
-More links for pruned models under different pruning rates and their training logs can be found [here]()
+More links for pruned models under different pruning rates and their training logs can be found [here]().
 
 
 ### Evaluate our models
