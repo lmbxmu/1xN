@@ -1,10 +1,12 @@
 # 1×N Block Pattern for Network Sparsity
 
-A pytorch re-implementation of 1×N Block Pattern for Network Sparsity.
+This is Pytorch re-implementation of "1×N Block Pattern for Network Sparsity". 
 
 
 <div align=center><img src="comparison.jpg" height = "60%" width = "70%"/></div>
 
+
+Our sparse convolution implementation has been released to ([TVM](https://128.84.21.199/abs/2002.10179)) community.
 
 
 ### Requirements
