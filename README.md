@@ -15,7 +15,7 @@ This is Pytorch re-implementation of "1×N Block Pattern for Network Sparsity". 
 -  Pytorch >= 1.0.1
 -  CUDA = 10.0.0
 
-### Running code
+### Code Running
 
 To reproduce our experiments, please use the following command:
 
@@ -34,7 +34,8 @@ python imagenet.py \
 --rearrange \
 ```
 
-### Evaluate our pruned models
+### Accuracy Performance
+
 **Table 1: Performance studies of our 1×N block sparsity with and without filter rearrangement.**
 
 | N = 2        | Top-1 Acc. | Top-5 Acc. | Model Link                                                   |
@@ -105,6 +106,7 @@ python imagenet.py \
 | 1 x 32 Block       | 70.769     | 89.696     | [Pruned Model](https://drive.google.com/drive/folders/1aOvNBbjbwe1LcRBaqLacMkrmBHcd-Mbg?usp=sharing) |
 
 
+### Evaluate our models
 
 To verify the performance of our pruned models, download our pruned models from the links provided above and run the following command:
 
@@ -151,6 +153,7 @@ optional arguments:
 
 
 <div align=center><img src="rearrangement.jpg" height = "60%" width = "70%"/></div>
+
 
 
 ## 3）Encoding and Decoding Efficiency
