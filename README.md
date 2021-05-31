@@ -144,6 +144,10 @@ optional arguments:
   --rearrange           If this parameter exists, filters will be rearranged (see paper for details).
 ```
 
+### Tips
+
+The above is our Pytorch re-implementation. A formal project will be released soon subject to the authority of Alibaba Group.
+
 ### Contact
 
 Any problem regarding this code re-implementation, please contact the first author: lmbxmu@stu.xmu.edu.cn or the third author: yxzhangxmu@163.com.
