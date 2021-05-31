@@ -36,34 +36,7 @@ python imagenet.py \
 
 ### Accuracy Performance
 
-**Table 1: Performance studies of our 1×N block sparsity with and without filter rearrangement.**
-
-| N = 2        | Top-1 Acc. | Top-5 Acc. | Model Link                                                   |
-| :----------- | ---------- | ---------- | ------------------------------------------------------------ |
-| w/o Rearange | 69.900     | 89.296     | [Pruned Model](https://drive.google.com/drive/folders/1U7DnIkJ9aMxRhMGQETVur21kHjIhzb-6?usp=sharing) |
-| Rearrange    | 70.233     | 89.417     | [Pruned Model](https://drive.google.com/drive/folders/1qRJDeYr5QdP_qtvKdkF0-RF0La3HbNLR?usp=sharing) |
-
-| N = 4        | Top-1 Acc. | Top-5 Acc. | Model Link                                                   |
-| :----------- | ---------- | ---------- | ------------------------------------------------------------ |
-| w/o Rearange | 69.521     | 88.920     | [Pruned Model](https://drive.google.com/drive/folders/1wCZKyz-PmM0dvydLqQYqEoS4Mq7to9KC?usp=sharing) |
-| Rearrange    | 69.579     | 88.944     | [Pruned Model](https://drive.google.com/drive/folders/1pslyMvs_LR_SE6coLq1a_uMwg6t65aj-?usp=sharing) |
-
-| N = 8        | Top-1 Acc. | Top-5 Acc. | Model Link                                                   |
-| :----------- | ---------- | ---------- | ------------------------------------------------------------ |
-| w/o Rearange | 69.206     | 88.608     | [Pruned Model](https://drive.google.com/drive/folders/1TLkaKksJXDAYBeXzGXVafYlZ_UPeSQiI?usp=sharing) |
-| Rearrange    | 69.372     | 88.862     | [Pruned Model](https://drive.google.com/drive/folders/1S9UzvbN-16MezlBb9x98Id-XaWDs4cei?usp=sharing) |
-
-| N = 16       | Top-1 Acc. | Top-5 Acc. | Model Link                                                   |
-| :----------- | ---------- | ---------- | ------------------------------------------------------------ |
-| w/o Rearange | 68.971     | 88.399     | [Pruned Model](https://drive.google.com/drive/folders/1l2L-VEX10Kl4QtUtyivUtGunvl5_W1se?usp=sharing) |
-| Rearrange    | 69.352     | 88.708     | [Pruned Model](https://drive.google.com/drive/folders/17PiNdI9CGjtDBpEPmLDgyen764U9HP2P?usp=sharing) |
-
-| N = 32       | Top-1 Acc. | Top-5 Acc. | Model Link                                                   |
-| :----------- | ---------- | ---------- | ------------------------------------------------------------ |
-| w/o Rearange | 68.431     | 88.315     | [Pruned Model](https://drive.google.com/drive/folders/1w0ERwQ6X7KL3srdiit-ls6Ppqv4NXGZt?usp=sharing) |
-| Rearrange    | 68.762     | 88.425     | [Pruned Model](https://drive.google.com/drive/folders/1e8VehUWw9XU9a4qvP2lYBmoM5c_AlDnw?usp=sharing) |
-
-**Table 2:  Performance comparison of our 1×N block sparsity against weight pruning and filter pruning**
+**Table 1:  Performance comparison of our 1×N block sparsity against weight pruning and filter pruning**
 
 | MobileNet-V1   | Top-1 Acc. | Top-5 Acc. | Model Link                                                   |
 | :------------- | ---------- | ---------- | ------------------------------------------------------------ |
@@ -151,8 +124,34 @@ optional arguments:
 
 ## 2）Filter Rearrangement
 
-
 <div align=center><img src="rearrangement.jpg" height = "60%" width = "70%"/></div>
+
+**Table 1: Performance studies of our 1×N block sparsity with and without filter rearrangement.**
+
+| N = 2        | Top-1 Acc. | Top-5 Acc. | Model Link                                                   |
+| :----------- | ---------- | ---------- | ------------------------------------------------------------ |
+| w/o Rearange | 69.900     | 89.296     | [Pruned Model](https://drive.google.com/drive/folders/1U7DnIkJ9aMxRhMGQETVur21kHjIhzb-6?usp=sharing) |
+| Rearrange    | 70.233     | 89.417     | [Pruned Model](https://drive.google.com/drive/folders/1qRJDeYr5QdP_qtvKdkF0-RF0La3HbNLR?usp=sharing) |
+
+| N = 4        | Top-1 Acc. | Top-5 Acc. | Model Link                                                   |
+| :----------- | ---------- | ---------- | ------------------------------------------------------------ |
+| w/o Rearange | 69.521     | 88.920     | [Pruned Model](https://drive.google.com/drive/folders/1wCZKyz-PmM0dvydLqQYqEoS4Mq7to9KC?usp=sharing) |
+| Rearrange    | 69.579     | 88.944     | [Pruned Model](https://drive.google.com/drive/folders/1pslyMvs_LR_SE6coLq1a_uMwg6t65aj-?usp=sharing) |
+
+| N = 8        | Top-1 Acc. | Top-5 Acc. | Model Link                                                   |
+| :----------- | ---------- | ---------- | ------------------------------------------------------------ |
+| w/o Rearange | 69.206     | 88.608     | [Pruned Model](https://drive.google.com/drive/folders/1TLkaKksJXDAYBeXzGXVafYlZ_UPeSQiI?usp=sharing) |
+| Rearrange    | 69.372     | 88.862     | [Pruned Model](https://drive.google.com/drive/folders/1S9UzvbN-16MezlBb9x98Id-XaWDs4cei?usp=sharing) |
+
+| N = 16       | Top-1 Acc. | Top-5 Acc. | Model Link                                                   |
+| :----------- | ---------- | ---------- | ------------------------------------------------------------ |
+| w/o Rearange | 68.971     | 88.399     | [Pruned Model](https://drive.google.com/drive/folders/1l2L-VEX10Kl4QtUtyivUtGunvl5_W1se?usp=sharing) |
+| Rearrange    | 69.352     | 88.708     | [Pruned Model](https://drive.google.com/drive/folders/17PiNdI9CGjtDBpEPmLDgyen764U9HP2P?usp=sharing) |
+
+| N = 32       | Top-1 Acc. | Top-5 Acc. | Model Link                                                   |
+| :----------- | ---------- | ---------- | ------------------------------------------------------------ |
+| w/o Rearange | 68.431     | 88.315     | [Pruned Model](https://drive.google.com/drive/folders/1w0ERwQ6X7KL3srdiit-ls6Ppqv4NXGZt?usp=sharing) |
+| Rearrange    | 68.762     | 88.425     | [Pruned Model](https://drive.google.com/drive/folders/1e8VehUWw9XU9a4qvP2lYBmoM5c_AlDnw?usp=sharing) |
 
 
 
