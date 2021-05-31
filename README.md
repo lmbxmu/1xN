@@ -153,9 +153,13 @@ optional arguments:
 <div align=center><img src="rearrangement.jpg" height = "60%" width = "70%"/></div>
 
 
-## 3）Encoding and Decoding Effieicney
+## 3）Encoding and Decoding Efficiency
 
 <div align=center><img src="sparse.jpg" height = "60%" width = "70%"/></div>
+
+### Performance and latency comparison
+
+<div align=center><img src="acceleration.jpg" height = "60%" width = "70%"/></div>
 
 Our sparse convolution implementation has been released to [TVM](https://github.com/apache/tvm/blob/main/tutorials/auto_scheduler/tune_network_x86.py) community.
 
