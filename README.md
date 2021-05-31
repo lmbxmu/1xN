@@ -6,7 +6,7 @@ This is Pytorch re-implementation of "1×N Block Pattern for Network Sparsity".
 <div align=center><img src="comparison.jpg" height = "60%" width = "70%"/></div>
 
 
-Our sparse convolution implementation has been released to ([TVM](https://128.84.21.199/abs/2002.10179)) community.
+Our sparse convolution implementation has been released to [TVM](https://github.com/apache/tvm/blob/main/tutorials/auto_scheduler/tune_network_x86.py) community.
 
 
 ### Requirements
