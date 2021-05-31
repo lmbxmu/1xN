@@ -34,16 +34,9 @@ python imagenet.py \
 --rearrange \
 ```
 
-Additionally, we provide the pre-trained models used in our experiments.
-
-| MobileNet-V1                                                 | MobileNet-V2                                                 | MobileNet-V3-small                                           | MobileNet-V3-large                                           |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [Pre-trained Model](https://drive.google.com/file/d/1bTk8nhghmiQNiE56ZdLioGbB7tNWtFMP/view?usp=sharing) | [Pre-trained Model](https://drive.google.com/file/d/1rOMvEr_KCAabpAQ1PFDmRvvPB7y2Uhg8/view?usp=sharing) | [Pre-trained Model](https://drive.google.com/file/d/1s0kMjO2_61IgaIigJWjRzH5XPqRJyWiI/view?usp=sharing) | [Pre-trained Model](https://drive.google.com/file/d/1uMiLtl9hADvpGht7d747geSu-Ssrzdll/view?usp=sharing) |
-
-
 ### Accuracy Performance
 
-**Table: Performance comparison of our 1×N block sparsity against weight pruning and filter pruning**
+**Table 1: Performance comparison of our 1×N block sparsity against weight pruning and filter pruning (p = 50%).**
 
 | MobileNet-V1   | Top-1 Acc. | Top-5 Acc. | Model Link                                                   |
 | :------------- | ---------- | ---------- | ------------------------------------------------------------ |
@@ -84,6 +77,11 @@ Additionally, we provide the pre-trained models used in our experiments.
 | 1 x 8 Block        | 71.478     | 90.163     | [Pruned Model](https://drive.google.com/drive/folders/1pmH-Lgec5tki9OE2nut_c8q8rvC_HqAJ?usp=sharing) |
 | 1 x 16 Block       | 71.112     | 90.129     | [Pruned Model](https://drive.google.com/drive/folders/1pmH-Lgec5tki9OE2nut_c8q8rvC_HqAJ?usp=sharing) |
 | 1 x 32 Block       | 70.769     | 89.696     | [Pruned Model](https://drive.google.com/drive/folders/1aOvNBbjbwe1LcRBaqLacMkrmBHcd-Mbg?usp=sharing) |
+
+
+<div align=center><img src="rates.jpg" height = "60%" width = "70%"/></div>
+
+More links for pruned models under different pruning rates and their training logs can be found [here]()
 
 
 ### Evaluate our models
@@ -133,7 +131,7 @@ optional arguments:
 
 <div align=center><img src="rearrangement.jpg" height = "60%" width = "70%"/></div>
 
-**Table: Performance studies of our 1×N block sparsity with and without filter rearrangement.**
+**Table 2: Performance studies of our 1×N block sparsity with and without filter rearrangement (p=50%).**
 
 | N = 2        | Top-1 Acc. | Top-5 Acc. | Model Link                                                   |
 | :----------- | ---------- | ---------- | ------------------------------------------------------------ |
