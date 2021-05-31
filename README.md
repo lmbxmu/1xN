@@ -168,13 +168,13 @@ optional arguments:
 
 <div align=center><img src="acceleration.jpg" height = "60%" width = "70%"/></div>
 
-Our sparse convolution implementation has been released to [TVM](https://github.com/apache/tvm/blob/main/tutorials/auto_scheduler/tune_network_x86.py) community.
+Our sparse convolution implementation has been released to [TVM](https://github.com/apache/tvm) community, which can be used by this [script](https://github.com/apache/tvm/blob/main/tutorials/auto_scheduler/tune_network_x86.py).
 
 
 ## 4）Contact
 
 Any problem regarding this code re-implementation, please contact the first author: lmbxmu@stu.xmu.edu.cn or the third author: yxzhangxmu@163.com.
 
-Any problem regarding the sparse convolution implementation, please contact the second author: laiyin.lyc@alibaba-inc.com.
+Any problem regarding the sparse convolution implementation, please contact the second author: xiamenlyc@gmail.com.
 
 
