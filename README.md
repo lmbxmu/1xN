@@ -3,7 +3,7 @@
 This is Pytorch re-implementation of "1×N Block Pattern for Network Sparsity". A more formal project will be released as soon as we are given the authority from Alibaba Group.
 
 
-## 1) 1 $\times$ N Block Sparsity
+## 1) 1xN Block Sparsity
 
 
 <div align=center><img src="comparison.jpg" height = "60%" width = "70%"/></div>
