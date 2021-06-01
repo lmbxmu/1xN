@@ -1,4 +1,4 @@
-# 1xN Block Pattern for Network Sparsity ![]( https://visitor-badge.glitch.me/badge?page_id=lmbxmu.1xn).
+# 1xN Block Pattern for Network Sparsity ([paper](https://arxiv.org/abs/2105.14713)) ![]( https://visitor-badge.glitch.me/badge?page_id=lmbxmu.1xn).
 
 This is Pytorch re-implementation of "1×N Block Pattern for Network Sparsity". A more formal project will be released as soon as we are given the authority from Alibaba Group.
 
