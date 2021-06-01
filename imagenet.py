@@ -341,7 +341,7 @@ def main():
     else:
         model = models.__dict__[args.arch]().to(device)
         ckpt = torch.load(args.pruned_model, map_location=device)
-        model.load_state_dict(ckpt['state_dict'])
+        model.load_state_dict(ckpt['state_dict'], strict=False)
         print('==> Evaluating Pruned Model..')
         validate(val_loader, model, loss_func, args)
 
