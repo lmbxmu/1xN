@@ -93,6 +93,7 @@ python imagenet.py \
 --gpus 0 \
 --arch mobilenet_v1 (or mobilenet_v2 or mobilenet_v3_large or mobilenet_v3_small) \
 --data_path [DATA_PATH] \
+--conv_type DenseConv \
 --evaluate [PRUNED_MODEL_PATH] \
 --eval_batch_size 256 \
 ```
@@ -120,7 +121,7 @@ optional arguments:
   --weight_decay        The weight decay of loss. default:4e-5
   --lr_type             lr scheduler. default: cos. optional:exp/cos/step/fixed
   --use_dali            If this parameter exists, use dali module to load ImageNet data (benefit in training acceleration).
-  --conv_type           Importance criterion of filters. Default: BlockL1Conv. optional: BlockRandomConv
+  --conv_type           Importance criterion of filters. Default: BlockL1Conv. optional: BlockRandomConv, DenseConv
   --pr_target           Pruning rate. default:0.5
   --full                If this parameter exists, prune fully-connected layer.
   --N                   Consecutive N kernels for removal (see paper for details).
