@@ -254,5 +254,11 @@ parser.add_argument(
     help="kernel number of the block 1 x N pattern"
 )
 
+parser.add_argument(
+    "--export_onnx", 
+    action="store_true", 
+    help="export onnx model"
+)
+
 args = parser.parse_args()
 
