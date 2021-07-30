@@ -41,6 +41,10 @@ class BlockL1Conv(nn.Conv2d):
         )
         return x
     
+    def sparse_weight(self):
+        sparseWeight = self.mask * self.weight
+        return sparseWeight
+        
     def left_weight(self):
         sparseWeight = self.mask.cpu() * self.weight.cpu()
         l1_value = torch.sum(torch.abs(sparseWeight))
