@@ -271,7 +271,6 @@ def get_model(args):
     return model, pr_cfg    
 
 def main():
-
     if args.pruned_model == None:
         start_epoch = 0
         best_acc = 0.0
@@ -335,15 +334,48 @@ def main():
                 'epoch': epoch + 1,
             }
             checkpoint.save_model(state, epoch + 1, is_best)
+        
+        if args.export_onnx == True:
+            import torch.onnx
+            print('==> Exporting Onnx Model..')
+            args.conv_type = 'DenseConv'
+            converted_model = models.__dict__[args.arch]().to(device)
+            for name, module in model.named_modules():
+                if hasattr(module, "mask"):
+                    sparseWeight = module.sparse_weight()
+                    module.weight.data = sparseWeight
+            converted_model.load_state_dict(model.state_dict(), strict=False)
+
+            dummy_input = torch.randn(1, 3, 224, 224, device=device)
+            ckpt_dir = Path(args.job_dir)  / 'checkpoint'
+            torch.onnx.export(model, dummy_input,f'{ckpt_dir}/best_model.onnx')
 
         logger.info('Best accurary(top5): {:.3f} (top1): {:.3f}'.format(float(best_acc),float(best_acc_top1)))
     
     else:
+        import torch
         model = models.__dict__[args.arch]().to(device)
         ckpt = torch.load(args.pruned_model, map_location=device)
         model.load_state_dict(ckpt['state_dict'], strict=False)
         print('==> Evaluating Pruned Model..')
         validate(val_loader, model, loss_func, args)
+
+        if args.export_onnx == True:
+            import torch.onnx
+            print('==> Exporting Onnx Model..')
+            args.conv_type = 'DenseConv'
+            converted_model = models.__dict__[args.arch]().to(device)
+            for name, module in model.named_modules():
+                if hasattr(module, "mask"):
+                    sparseWeight = module.sparse_weight()
+                    module.weight.data = sparseWeight
+            
+            converted_model.load_state_dict(model.state_dict(), strict=False)
+            validate(val_loader, converted_model, loss_func, args)    
+
+            dummy_input = torch.randn(1, 3, 224, 224, device=device)
+            ckpt_dir = Path(args.job_dir) / 'checkpoint'
+            torch.onnx.export(model, dummy_input,f'{ckpt_dir}/best_model.onnx')
 
 def resume(args, model, optimizer):
     if os.path.exists(args.job_dir+'/checkpoint/model_last.pt'):
