@@ -126,6 +126,7 @@ optional arguments:
   --full                If this parameter exists, prune fully-connected layer.
   --N                   Consecutive N kernels for removal (see paper for details).
   --rearrange           If this parameter exists, filters will be rearranged (see paper for details).
+  --export_onnx         If this parameter exists, export onnx model.
 ```
 
 ## 2）Filter Rearrangement
