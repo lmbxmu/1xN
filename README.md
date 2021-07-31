@@ -170,7 +170,19 @@ optional arguments:
 
 <div align=center><img src="acceleration.jpg" height = "60%" width = "70%"/></div>
 
-Our sparse convolution implementation has been released to [TVM](https://github.com/apache/tvm) community, which can be used by this [script](https://github.com/apache/tvm/blob/main/tutorials/auto_scheduler/tune_network_x86.py).
+Our sparse convolution implementation has been released to [TVM](https://github.com/apache/tvm) community.
+
+To verify the performance of our pruned models, convert onnx model and run the following command:
+
+```
+python model_tune.py \
+--onnx_path [ONNX_MODEL_PATH] \
+--bsr 4 \
+--bsc 1 \
+--sparsity 0.5
+```
+
+The detail tuning setting is referred to [TVM](https://tvm.apache.org/docs/tutorials/auto_scheduler/tune_network_arm.html).
 
 
 ## 4）Contact
