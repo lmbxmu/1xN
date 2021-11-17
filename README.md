@@ -1,6 +1,6 @@
-# 1&times;N Block Pattern for Network Sparsity ([paper](https://arxiv.org/abs/2105.14713)) ![]( https://visitor-badge.glitch.me/badge?page_id=lmbxmu.1xn).
-
-This is Pytorch re-implementation of "1×N Block Pattern for Network Sparsity". A more formal project will be released as soon as we are given the authority from Alibaba Group.
+# 1&times;N Pattern for Pruning Convolutional Neural Networks ([paper](https://arxiv.org/abs/2105.14713)) ![]( https://visitor-badge.glitch.me/badge?page_id=lmbxmu.1xn).
+ 
+This is Pytorch re-implementation of "1xN Pattern for Pruning Convolutional Neural Networks". A more formal project will be released as soon as we are given the authority from Alibaba Group.
 
 
 ## 1) 1&times;N Block Sparsity
@@ -81,7 +81,8 @@ python imagenet.py \
 
 <div align=center><img src="rates.jpg" height = "60%" width = "70%"/></div>
 
-More links for pruned models under different pruning rates and their training logs can be found [here](https://drive.google.com/drive/folders/1Exbxsf-VlJUmaLxxeJ0EmP0ymkpZK5mQ?usp=sharing).
+More links for pruned models under different pruning rates and their training logs can be found in [MobileNet-V2](https://drive.google.com/drive/folders/1Exbxsf-VlJUmaLxxeJ0EmP0ymkpZK5mQ?usp=sharing) and [ResNet-50](https://drive.google.com/drive/folders/1TV2kX5Xh-OQfk_rIgTjEdUPzKMrlGeN-?usp=sharing).
+
 
 
 ### Evaluate our models
