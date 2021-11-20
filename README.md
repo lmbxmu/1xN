@@ -1,4 +1,4 @@
-# 1&times;N Pattern for Pruning Convolutional Neural Networks ([paper](https://arxiv.org/abs/2105.14713)) ![]( https://visitor-badge.glitch.me/badge?page_id=lmbxmu.1xn).
+# 1xN Pattern for Pruning Convolutional Neural Networks ([paper](https://arxiv.org/abs/2105.14713)) ![]( https://visitor-badge.glitch.me/badge?page_id=lmbxmu.1xn).
  
 This is Pytorch re-implementation of "1xN Pattern for Pruning Convolutional Neural Networks". A more formal project will be released as soon as we are given the authority from Alibaba Group.
 
