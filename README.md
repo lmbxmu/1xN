@@ -33,7 +33,7 @@ python imagenet.py \
 --eval_batch_size 256 \
 --rearrange \
 ```
-
+The pre-trained models can be downloaded at [MobileNet-V1](https://drive.google.com/file/d/1bTk8nhghmiQNiE56ZdLioGbB7tNWtFMP/view?usp=sharing), [MobileNet-V2](https://drive.google.com/file/d/1rOMvEr_KCAabpAQ1PFDmRvvPB7y2Uhg8/view?usp=sharing), [MobileNet-V3-Large](https://drive.google.com/file/d/1uMiLtl9hADvpGht7d747geSu-Ssrzdll/view?usp=sharing), [MobileNet-V3-Small](https://drive.google.com/file/d/1s0kMjO2_61IgaIigJWjRzH5XPqRJyWiI/view?usp=sharing) and [ResNet-50](https://drive.google.com/file/d/1IKcmsiqj_uEtKKawtulFuktEX0cAbBcC/view?usp=sharing).
 ### Accuracy Performance
 
 **Table 1: Performance comparison of our 1×N block sparsity against weight pruning and filter pruning (p = 50%).**
