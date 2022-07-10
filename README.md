@@ -81,6 +81,8 @@ The pre-trained models can be downloaded at [MobileNet-V1](https://drive.google.
 
 <div align=center><img src="rates.jpg" height = "60%" width = "70%"/></div>
 
+Besides, we provide the raw data for plotting the above figures in `./raw_data_figs`. For example, run `python ./raw_data_figs/resnet50_top1.py` to plot top-1 accuracy of ResNet-50 pruned by different methods.
+
 More links for pruned models under different pruning rates and their training logs can be found in [MobileNet-V2](https://drive.google.com/drive/folders/1Exbxsf-VlJUmaLxxeJ0EmP0ymkpZK5mQ?usp=sharing) and [ResNet-50](https://drive.google.com/drive/folders/1TV2kX5Xh-OQfk_rIgTjEdUPzKMrlGeN-?usp=sharing).
 
 
