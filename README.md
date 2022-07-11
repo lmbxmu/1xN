@@ -85,7 +85,7 @@ Besides, we provide the raw data for plotting the above figures in `./raw_data_f
 
 More links for pruned models under different pruning rates and their training logs can be found in [MobileNet-V2](https://drive.google.com/drive/folders/1Exbxsf-VlJUmaLxxeJ0EmP0ymkpZK5mQ?usp=sharing) and [ResNet-50](https://drive.google.com/drive/folders/1TV2kX5Xh-OQfk_rIgTjEdUPzKMrlGeN-?usp=sharing).
 
-**Table 2: Performance studies of our 1×N pruning with kernel-wise pruning.
+**Table 2: Performance studies of our 1×N pruning with kernel-wise pruning.**
 
 |  ResNet-50  | Top-1 Acc. | Top-5 Acc. | Model Link                                                   |
 | :------------- | ---------- | ---------- | ------------------------------------------------------------ |
