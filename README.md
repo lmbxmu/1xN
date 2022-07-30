@@ -5,8 +5,7 @@ This is Pytorch re-implementation of "1xN Pattern for Pruning Convolutional Neur
 
 ## 1) 1&times;N Block Pruning
 
-
-<div align=center><img src="https://github.com/lmbxmu/1xN/blob/master/images/comparison.jpg" height = "60%" width = "70%"/></div>
+<div align=center><img src="https://raw.githubusercontent.com/lmbxmu/1xN/master/images/comparison.jpg" height = "60%" width = "70%"/></div>
 
 
 ### Requirements
@@ -173,7 +172,7 @@ optional arguments:
 
 ## 3）Encoding and Decoding Efficiency
 
-<div align=center><img src="https://github.com/lmbxmu/1xN/blob/master/images/sparse.jpg" height = "60%" width = "70%"/></div>
+<div align=center><img src="https://raw.githubusercontent.com/lmbxmu/1xN/master/images/sparse.jpg" height = "60%" width = "70%"/></div>
 
 ### Performance and latency comparison
 
