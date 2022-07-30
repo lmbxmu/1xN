@@ -11,7 +11,6 @@ class Data:
         if args.gpus is not None:
             pin_memory = True
 
-        #scale_size = 299 if args.student_model.startswith('inception') else 224
         scale_size = 224
 
         traindir = os.path.join(args.data_path, 'ILSVRC2012_img_train')

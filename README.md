@@ -196,8 +196,8 @@ The detail tuning setting is referred to [TVM](https://tvm.apache.org/docs/tutor
 
 ## 4）Contact
 
-Any problem regarding this code re-implementation, please contact the first author: lmbxmu@stu.xmu.edu.cn or the third author: yuxinzhang@stu.xmu.edu.cn.
+Any problem regarding this code re-implementation, please contact the first author: lmbxmu@stu.xmu.edu.cn or the second author: yuxinzhang@stu.xmu.edu.cn.
 
-Any problem regarding the sparse convolution implementation, please contact the second author: xiamenlyc@gmail.com.
+Any problem regarding the sparse convolution implementation, please contact the third author: xiamenlyc@gmail.com.
 
 
