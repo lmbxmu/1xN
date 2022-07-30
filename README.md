@@ -6,7 +6,7 @@ This is Pytorch re-implementation of "1xN Pattern for Pruning Convolutional Neur
 ## 1) 1&times;N Block Pruning
 
 
-<div align=center><img src="./images/comparison.jpg" height = "60%" width = "70%"/></div>
+<div align=center><img src="https://github.com/lmbxmu/1xN/blob/master/images/comparison.jpg" height = "60%" width = "70%"/></div>
 
 
 ### Requirements
@@ -79,7 +79,7 @@ The pre-trained models can be downloaded at [MobileNet-V1](https://drive.google.
 | 1 x 32 Block       | 70.769     | 89.696     | [Pruned Model](https://drive.google.com/drive/folders/1aOvNBbjbwe1LcRBaqLacMkrmBHcd-Mbg?usp=sharing) |
 
 
-<div align=center><img src="./images/rates.jpg" height = "60%" width = "70%"/></div>
+<div align=center><img src="https://github.com/lmbxmu/1xN/blob/master/images/rates.jpg" height = "60%" width = "70%"/></div>
 
 Besides, we provide the raw data for plotting the above figures in `./raw_data_fig4`. For example, run `python ./raw_data_fig4/resnet50_top1.py` to plot top-1 accuracy of ResNet-50 pruned by different methods.
 
@@ -140,7 +140,7 @@ optional arguments:
 
 ## 2）Filter Rearrangement
 
-<div align=center><img src="./images/rearrangement.jpg" height = "60%" width = "70%"/></div>
+<div align=center><img src="https://github.com/lmbxmu/1xN/blob/master/images/rearrangement.jpg" height = "60%" width = "70%"/></div>
 
 **Table 2: Performance studies of our 1×N block sparsity with and without filter rearrangement (p=50%).**
 
@@ -173,11 +173,11 @@ optional arguments:
 
 ## 3）Encoding and Decoding Efficiency
 
-<div align=center><img src="./images/sparse.jpg" height = "60%" width = "70%"/></div>
+<div align=center><img src="https://github.com/lmbxmu/1xN/blob/master/images/sparse.jpg" height = "60%" width = "70%"/></div>
 
 ### Performance and latency comparison
 
-<div align=center><img src="./images/acceleration.jpg" height = "60%" width = "70%"/></div>
+<div align=center><img src="https://github.com/lmbxmu/1xN/blob/master/images/acceleration.jpg" height = "60%" width = "70%"/></div>
 
 Our sparse convolution implementation has been released to [TVM](https://github.com/apache/tvm) community.
 
