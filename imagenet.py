@@ -1,4 +1,3 @@
-#imagenet
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -248,7 +247,13 @@ def get_model(args):
                 if ckpt[name+'.weight'].dim() == 2:
                     weight = ckpt[name+'.weight']
                     ckpt[name+'.weight'] = weight.view(weight.size(0), weight.size(1), 1, 1)
-        model.load_state_dict(ckpt, strict = False)
+    elif args.arch == 'resnet50':
+        model = nn.DataParallel(model)
+        model.load_state_dict(ckpt['state_dict'],strict=False)
+        ckpt = model.module.state_dict() 
+        model = models.__dict__[args.arch]().to(device)
+    
+    model.load_state_dict(ckpt, strict = False)
 
     print('==> Testing Baseline Model..')
     validate(val_loader, model, loss_func, args)
@@ -260,6 +265,7 @@ def get_model(args):
         'mobilenet_v2': 35,
         'mobilenet_v3_small': 42,
         'mobilenet_v3_large': 48,
+        'resnet50': 54
     }
 
     pr_cfg = [args.pr_target] * cfg_len[args.arch]
@@ -272,6 +278,7 @@ def get_model(args):
     return model, pr_cfg    
 
 def main():
+
     if args.pruned_model == None:
         start_epoch = 0
         best_acc = 0.0
@@ -287,9 +294,16 @@ def main():
             if hasattr(module, "mask"):
                 if args.rearrange == False:
                     module.get_mask(pr_cfg[i],args.N)
+                elif args.conv_type != 'BlockL1Conv':
+                    module.get_mask(pr_cfg[i])
                 else:
                     if args.arch == 'mobilenet_v1':
                         module.get_rearr_mask(pr_cfg[i],args.N)
+                    elif args.arch == 'resnet50':
+                        if name.endswith('conv3'):
+                            module.get_mask(pr_cfg[i],args.N)
+                        else:
+                            module.get_rearr_mask(pr_cfg[i],args.N)
                     else:
                         if flag == False:
                             module.get_rearr_mask(pr_cfg[i],args.N)
@@ -301,7 +315,6 @@ def main():
                             else:
                                 flag = False
                 i += 1
-    
         model = model.to(device)
         
         if args.resume == True:
@@ -335,7 +348,7 @@ def main():
                 'epoch': epoch + 1,
             }
             checkpoint.save_model(state, epoch + 1, is_best)
-        
+
         if args.export_onnx == True:
             import torch.onnx
             print('==> Exporting Onnx Model..')
@@ -352,31 +365,14 @@ def main():
             torch.onnx.export(model, dummy_input,f'{ckpt_dir}/best_model.onnx')
 
         logger.info('Best accurary(top5): {:.3f} (top1): {:.3f}'.format(float(best_acc),float(best_acc_top1)))
+        logger.info('Best accurary(top5): {:.3f} (top1): {:.3f}'.format(float(best_acc),float(best_acc_top1)))
     
     else:
-        import torch
         model = models.__dict__[args.arch]().to(device)
         ckpt = torch.load(args.pruned_model, map_location=device)
-        model.load_state_dict(ckpt['state_dict'], strict=False)
+        model.load_state_dict(ckpt['state_dict'])
         print('==> Evaluating Pruned Model..')
         validate(val_loader, model, loss_func, args)
-
-        if args.export_onnx == True:
-            import torch.onnx
-            print('==> Exporting Onnx Model..')
-            args.conv_type = 'DenseConv'
-            converted_model = models.__dict__[args.arch]().to(device)
-            for name, module in model.named_modules():
-                if hasattr(module, "mask"):
-                    sparseWeight = module.sparse_weight()
-                    module.weight.data = sparseWeight
-            
-            converted_model.load_state_dict(model.state_dict(), strict=False)
-            validate(val_loader, converted_model, loss_func, args)    
-
-            dummy_input = torch.randn(1, 3, 224, 224, device=device)
-            ckpt_dir = Path(args.job_dir) / 'checkpoint'
-            torch.onnx.export(model, dummy_input,f'{ckpt_dir}/best_model.onnx')
 
 def resume(args, model, optimizer):
     if os.path.exists(args.job_dir+'/checkpoint/model_last.pt'):
